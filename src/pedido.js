@@ -1,45 +1,42 @@
-let n1 = "Café";
-let p1 = 8;
-let q1 = 2;
+const DESCONTO = 0.10;
+const QUANTIDADE_MINIMA_DESCONTO = 3;
 
-let n2 = "Pão de Queijo";
-let p2 = 6;
-let q2 = 3;
+const produtos = [
+    {
+        nome: "Café",
+        preco: 8,
+        quantidade: 2
+    },
+    {
+        nome: "Pão de Queijo",
+        preco: 6,
+        quantidade: 3
+    },
+    {
+        nome: "Bolo",
+        preco: 10,
+        quantidade: 1
+    },
+    {
+        nome: "Suco de Laranja",
+        preco: 7,
+        quantidade: 4
+    }
+];
 
-let n3 = "Bolo";
-let p3 = 10;
-let q3 = 1;
+function calcularTotalProduto(produto) {
+    let total = produto.preco * produto.quantidade;
 
-function totalCafe() {
-    let resultado = p1 * q1;
-
-    if (q1 >= 3) {
-        resultado = resultado - (resultado * 0.10);
+    if (produto.quantidade >= QUANTIDADE_MINIMA_DESCONTO) {
+        total = total - (total * DESCONTO);
     }
 
-    console.log(n1 + ": R$ " + resultado);
+    return total;
 }
 
-function totalPao() {
-    let resultado = p2 * q2;
-
-    if (q2 >= 3) {
-        resultado = resultado - (resultado * 0.10);
-    }
-
-    console.log(n2 + ": R$ " + resultado);
+function exibirProduto(produto) {
+    const total = calcularTotalProduto(produto);
+    console.log(`${produto.nome}: R$ ${total}`);
 }
 
-function totalBolo() {
-    let resultado = p3 * q3;
-
-    if (q3 >= 3) {
-        resultado = resultado - (resultado * 0.10);
-    }
-
-    console.log(n3 + ": R$ " + resultado);
-}
-
-totalCafe();
-totalPao();
-totalBolo();
+produtos.forEach(exibirProduto);
