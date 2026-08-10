@@ -34,9 +34,29 @@ function calcularTotalProduto(produto) {
     return total;
 }
 
+function calcularTotalPedido() {
+    return produtos.reduce((total, produto) => {
+        return total + calcularTotalProduto(produto);
+    }, 0);
+}
+
+function calcularTotalItens() {
+    return produtos.reduce((total, produto) => {
+        return total + produto.quantidade;
+    }, 0);
+}
+
 function exibirProduto(produto) {
     const total = calcularTotalProduto(produto);
-    console.log(`${produto.nome}: R$ ${total}`);
+    console.log(`${produto.nome}: R$ ${total.toFixed(2)}`);
+}
+
+function exibirResumo() {
+    console.log("\n--- Resumo do Pedido ---");
+    console.log(`Total de itens: ${calcularTotalItens()}`);
+    console.log(`Total do pedido: R$ ${calcularTotalPedido().toFixed(2)}`);
 }
 
 produtos.forEach(exibirProduto);
+
+exibirResumo();
